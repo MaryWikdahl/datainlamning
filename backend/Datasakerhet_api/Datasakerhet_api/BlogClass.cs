@@ -30,7 +30,7 @@ namespace Datasakerhet_api
         public string Title { get; set; }
 
         [Required]
-        [Column(TypeName = "nvarchar(100)")]
+        [Column(TypeName = "nvarchar(4d000)")]
         public string Message { get; set; }
 
         [Required]
@@ -38,19 +38,33 @@ namespace Datasakerhet_api
         public string Date { get; set; }
     }
 
-
     public class BlogClassModel
     {
         public BlogClassModel() { }
 
-        public BlogClassModel(string title, string message)
+        public BlogClassModel(int id, string title, string message, string date)
+        {
+            Id = id;
+            Title = title;
+            Message = message;
+            Date = date;
+        }
+        private int Id { get; set; }
+        public string Title { get; set; }
+        public string Message { get; set; }
+        private string Date { get; set; }
+    }
+    public class BlogClassDTO
+    {
+        public BlogClassDTO(string title, string message, string date)
         {
             Title = title;
             Message = message;
+            Date = date;
         }
-
         public string Title { get; set; }
         public string Message { get; set; }
+        public string Date { get; set; }
     }
 }
 

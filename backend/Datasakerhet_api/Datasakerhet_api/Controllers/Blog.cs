@@ -16,17 +16,17 @@ namespace Datasakerhet_api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BlogClassEntity>>> GetAllBlogPosts()
+        public async Task<ActionResult<IEnumerable<BlogClassDTO>>> GetAllBlogPosts()
         {
-            var items = new List<BlogClassEntity>();
+            var items = new List<BlogClassDTO>();
 
             foreach (var item in await _context.Blogposts.ToListAsync())
-                items.Add(new BlogClassEntity(item.Title, item.Message));
+                items.Add(new BlogClassDTO(item.Title, item.Message, item.Date));
 
             return items;
         }
         [HttpPost]
-        public async Task<ActionResult<BlogClassEntity>> PostBlogpostEntity(BlogClassEntity model)
+        public async Task<ActionResult<BlogClassEntity>> PostBlogpostEntity(BlogClassModel model)
         {
             var sanitizer = new HtmlSanitizer();
             var cleanTitle = sanitizer.Sanitize(model.Title);
@@ -37,8 +37,8 @@ namespace Datasakerhet_api.Controllers
 
 
 
-            return CreatedAtAction("PostBlogpostEntity", new { id = blogpostEntity.Id }, new BlogClassModel(blogpostEntity.Title,
-                 blogpostEntity.Message));
+            return CreatedAtAction("PostBlogpostEntity", new { id = blogpostEntity.Id }, new BlogClassModel(blogpostEntity.Id, blogpostEntity.Title,
+                 blogpostEntity.Message, blogpostEntity.Date));
         }
     }
 }

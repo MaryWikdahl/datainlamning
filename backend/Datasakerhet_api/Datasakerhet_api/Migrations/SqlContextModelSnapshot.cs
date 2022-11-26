@@ -35,7 +35,7 @@ namespace Datasakerhetapi.Migrations
 
                     b.Property<string>("Message")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(10000)");
 
                     b.Property<string>("Title")
                         .IsRequired()
